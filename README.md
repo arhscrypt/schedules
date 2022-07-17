@@ -9,23 +9,54 @@ CRUD features to manage match schedules.
 
 ## Usage
 
+### API List
+
+Base URL
 ```bash
-localhost:<port>/rest/
+http://localhost:8000/
 ```
 
-```bash
-localhost:<port>/rest/<id>
-```
+- #### API List
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
+  - Get all data
+    
+    ```bash
+    Method : GET
+    localhost:<port>/rest/
+    ```
+  
+  - Add new data
+  
+    ```bash
+    Method : POST
+    localhost:<port>/rest/<id>
+    ```
+  
+  - Update data by 'id'
+    
+    ```bash
+    Method : PUT
+    localhost:<port>/rest/<id>
+    ```
+  
+  - Delete data by 'id'
+    
+    ```bash
+    Method : DELETE
+    localhost:<port>/rest/<id>
+    ```
+  
+- #### JSON Response
+  
+   ```json
+  [
+    {
+      "schedule_name": "Bowling",
+      "schedule_time": "Friday"
+    },
+    {
+      "schedule_name": "Futsal",
+      "schedule_time": "Friday"
+    }
+  ]
+  ```
