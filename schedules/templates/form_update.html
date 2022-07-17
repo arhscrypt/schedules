@@ -1,0 +1,40 @@
+{% extends './base.html' %}
+
+{% block title %} Update Schedules {% endblock title %}
+{% block content %}
+{% load static %}
+
+<form action="/update/{{ ids }}" method="post">
+    {% csrf_token %}
+    {{ update_form.as_p }}
+    <input id="b_submit" type="submit" class="btn btn-primary" value="Submit" onclick="spinner_active()"></input>
+    <button id="b_submit_spinner" class="btn btn-light" type="button">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="sr-only">Loading...</span>
+    </button>
+</form>
+
+<script>
+    const btn_submit = document.getElementById('b_submit')
+    const btn_submit_spinner = document.getElementById('b_submit_spinner')
+    function spinner_active(){
+        btn_submit_spinner.style.visibility = "visible";
+        setTimeout(() => {
+            btn_submit_spinner.style.visibility = "collapse";
+        },500);
+    }
+    
+    $.ajax({
+        url: "/update/{{ ids }}",
+        type: "GET",
+        success: function(response){
+            btn_submit_spinner.style.visibility = "visible";
+            setTimeout(() => {
+                btn_submit_spinner.style.visibility = "collapse";
+            },500);
+            console.log(response);
+        },
+    });
+</script>
+
+{% endblock content %}

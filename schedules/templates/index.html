@@ -1,0 +1,70 @@
+{% extends './base.html' %}
+
+{% block title %} Match Schedules {% endblock title %}
+{% block content %}
+  <a type="button" class="btn btn-primary" href="/add">Add schedule</a>
+  <div style="border: 0px solid grey">
+    <table id="tb_sch" class="table">
+      <thead>
+        <!-- javascript fetching -->
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Schedule Name</th>
+          <th scope="col">Schedule Time</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td scope="row">{{ item.id }}</td>
+          <td>{{ item.schedule_name }}</td>
+          <td>{{ item.schedule_time }}</td>
+          <td>
+            <a type='button' class='btn btn-danger btn-sm ms-1' onclick="spinner_active()" href="/delete/{{item.id}}" >Delete</a>
+            <a type='button' class='btn btn-success btn-sm ms-1' href="/update/{{item.id}}" >Update</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <nav aria-label="...">
+    <ul class="pagination">
+      
+      {% if items.has_previous %}
+      <li class="page-item">
+          <a class="page-link" href="?page=1">&laquo; First</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ items.previous_page_number }}">Prev</a>
+      </li>
+      {% endif %}
+      
+      {% for x in nums %}
+      {% if forloop.counter == items.number %}
+        <li class="page-item active">
+        {% else %}
+        <li class="page-item">
+      {% endif %}
+        <a class="page-link" href="?page={{ forloop.counter }}">
+          <span class="current">
+            {{ forloop.counter }}
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+      
+      {% if items.has_next %}
+      <li class="page-item">
+          <a class="page-link" href="?page={{ items.next_page_number }}">Next</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ items.paginator.num_pages }}">Last &raquo;</a>
+      </li>
+      {% endif %}
+      
+    </ul>
+  </nav>
+
+{% endblock content %}

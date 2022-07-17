@@ -1,0 +1,44 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Match Schedules</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--CSS-->
+        <link rel="stylesheet" href="{% static 'vendor/bs5/css/bootstrap.min.css'%}"/>
+        <!--JS-->
+        <script src="{% static 'vendor/jquery/jquery-1.11.0.min.js' %}"></script>
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="card" style="margin-top:10px">
+                <div class="card-body">
+                    <p class="fs-3">{% block title %}{% endblock title %}<p>
+                    {% block content %}
+                
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+
+        <script src="{% static 'vendor/bs5/js/bootstrap.bundle.min.js' %}"></script>
+
+        <script>
+            function delete_act(urls) {
+              $.ajax({
+                url: urls,
+                type: "DELETE",
+                success: function (data) {
+                  console.log(data);
+                },
+              });
+              location.href = "/";
+            }
+        </script>
+        
+    </body>
+</html>
